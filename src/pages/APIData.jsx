@@ -5,16 +5,33 @@ import { translateStatus, translateGender, translateSpecies } from '../utils/tra
 import '../styles/APIData.css';
 import Pagination from '../components/Pagination';
 import Loader from '../components/Loader';
+import FilterBar from '../components/FilterBar';
 
 const APIData = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
 
+  const [selectedStatus, setSelectedStatus] = useState('');
+  const [selectedSpecies, setSelectedSpecies] = useState('');
+
+  const statusOptions = ['Alive', 'Dead', 'unknown'];
+  const speciesOptions = ['Human', 'Alien', 'Humanoid', 'Robot', 'Cronenberg', 'Animal', 'Disease', 'Poopybutthole', 'Mythological Creature'];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setQuery(searchTerm);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
   const getUrl = () => {
     const base = `https://rickandmortyapi.com/api/character/`;
     const params = [];
     if (query) params.push(`name=${encodeURIComponent(query)}`);
+    if (selectedStatus) params.push(`status=${encodeURIComponent(selectedStatus)}`);
+    if (selectedSpecies) params.push(`species=${encodeURIComponent(selectedSpecies)}`);
     if (page) params.push(`page=${page}`);
     return `${base}?${params.join('&')}`;
   };
@@ -24,7 +41,7 @@ const APIData = () => {
 
   useEffect(() => {
     setPage(1);
-  }, [query]);
+  }, [query, selectedStatus, selectedSpecies]);
 
   useEffect(() => {
     if (data && data.info && data.info.pages) {
@@ -33,9 +50,12 @@ const APIData = () => {
     }
   }, [data, page]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setQuery(searchTerm);
+
+  const handleClear = () => {
+    setSearchTerm('');
+    setQuery('');
+    setSelectedStatus('');
+    setSelectedSpecies('');
     setPage(1);
   };
 
@@ -56,25 +76,34 @@ const APIData = () => {
     <Card key={item.id}>
       <img className="card-image" src={item.image} alt={item.name} />
       <h3>{item.name}</h3>
-  <p>Estado: {translateStatus(item.status)}</p>
-  <p>Especie: {translateSpecies(item.species)}</p>
-  <p>Género: {translateGender(item.gender)}</p>
+      <p>Estado: {translateStatus(item.status)}</p>
+      <p>Especie: {translateSpecies(item.species)}</p>
+      <p>Género: {translateGender(item.gender)}</p>
     </Card>
   );
 
   return (
     <div className="api-data-container">
       <h1>Datos desde API Rick and Morty</h1>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Buscar personaje por nombre"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+      <form>
+        <FilterBar
+          searchText={searchTerm}
+          placeholder='Buscar personaje por nombre'
+          firstSelect='Estado'
+          secondSelect='Especie'
+          tipos={statusOptions}
+          integrantes={speciesOptions}
+          selectedTipo={selectedStatus}
+          selectedIntegrante={selectedSpecies}
+          onSearchChange={setSearchTerm}
+          onTipoChange={setSelectedStatus}
+          onIntegranteChange={setSelectedSpecies}
+          onClear={handleClear}
+          visibleButtonSearch={false}
         />
-        <button type="submit">Buscar</button>
+
       </form>
-  {loading && <Loader />}
+      {loading && <Loader />}
       {error && <div>Error: {error}</div>}
       {data && data.results && (
         <div className="api-cards">
@@ -82,7 +111,7 @@ const APIData = () => {
         </div>
       )}
       {data && !data.results && data.name && renderCard(data)}
-      
+
       {data && data.info && (
         <Pagination
           page={page}
