@@ -1,0 +1,107 @@
+[
+  {
+    "integrante": "Ivan",
+    "rol": "Full-Stack Developer",
+    "skills": [
+      {
+        "name": "Node.js - React",
+        "level": 88,
+        "color": "#61DAFB"
+      },
+      {
+        "name": "MongoDB",
+        "level": 82,
+        "color": "#CC6699"
+      },
+      {
+        "name": "Docker",
+        "level": 78,
+        "color": "#3178C6"
+      }
+    ]
+  },
+  {
+    "integrante": "Ignacio",
+    "rol": "Full-Stack Developer",
+    "skills": [
+      {
+        "name": "Node.js - React",
+        "level": 90,
+        "color": "#61DAFB"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 84,
+        "color": "#CC6699"
+      },
+      {
+        "name": "AWS",
+        "level": 76,
+        "color": "#3178C6"
+      }
+    ]
+  },
+  {
+    "integrante": "Laura",
+    "rol": "Frontend Developer",
+    "skills": [
+      {
+        "name": "React",
+        "level": 85,
+        "color": "#61DAFB"
+      },
+      {
+        "name": "CSS/SASS",
+        "level": 90,
+        "color": "#CC6699"
+      },
+      {
+        "name": "TypeScript",
+        "level": 75,
+        "color": "#3178C6"
+      }
+    ]
+  },
+  {
+    "integrante": "Romina",
+    "rol": "Frontend Developer",
+    "skills": [
+      {
+        "name": "React",
+        "level": 80,
+        "color": "#61DAFB"
+      },
+      {
+        "name": "JavaScript",
+        "level": 92,
+        "color": "#CC6699"
+      },
+      {
+        "name": "Figma",
+        "level": 85,
+        "color": "#3178C6"
+      }
+    ]
+  },
+  {
+    "integrante": "Gonzalo",
+    "rol": "Frontend Developer",
+    "skills": [
+      {
+        "name": "React",
+        "level": 87,
+        "color": "#61DAFB"
+      },
+      {
+        "name": "Tailwind CSS",
+        "level": 93,
+        "color": "#CC6699"
+      },
+      {
+        "name": "Git",
+        "level": 81,
+        "color": "#3178C6"
+      }
+    ]
+  }
+]

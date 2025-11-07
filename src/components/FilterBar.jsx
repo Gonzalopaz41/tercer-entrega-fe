@@ -9,8 +9,13 @@ export default function FilterBar({
   selectedTipo,
   onTipoChange,
   selectedIntegrante,
-  onIntegranteChange
-  , onClear
+  onIntegranteChange,
+  onClear,
+  placeholder = 'Buscar por título, integrante, tipo, director, artista o año...',
+  firstSelect = 'Tipo',
+  secondSelect = 'Integrante',
+  visibleButtonSearch = false,
+
 }) {
   return (
     <div className="filters-container">
@@ -21,13 +26,13 @@ export default function FilterBar({
           type="text"
           value={searchText}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Buscar por título, integrante, tipo, director, artista o año..."
+          placeholder={placeholder}
           className="filter-input"
         />
       </div>
 
       <div className="filter-group">
-        <label htmlFor="tipo">Tipo:</label>
+        <label htmlFor="tipo">{firstSelect}:</label>
         <select id="tipo" value={selectedTipo} onChange={(e) => onTipoChange(e.target.value)} className="filter-select">
           <option value="">Todos</option>
           {tipos.map(t => (
@@ -37,7 +42,7 @@ export default function FilterBar({
       </div>
 
       <div className="filter-group">
-        <label htmlFor="integrante">Integrante:</label>
+        <label htmlFor="integrante">{secondSelect}:</label>
         <select id="integrante" value={selectedIntegrante} onChange={(e) => onIntegranteChange(e.target.value)} className="filter-select">
           <option value="">Todos</option>
           {integrantes.map(i => (
@@ -46,9 +51,11 @@ export default function FilterBar({
         </select>
       </div>
 
-      <div className="filter-group" style={{alignSelf: 'center'}}>
+      <div className="filter-group" style={{ alignSelf: 'center', display: 'flex' }}>
         <button type="button" className="filter-clear" onClick={() => onClear && onClear()}>Limpiar</button>
+        {visibleButtonSearch && <button type="submit" className='filter-clear'>Buscar</button>}
       </div>
+
     </div>
   );
 }

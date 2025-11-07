@@ -1,62 +1,61 @@
 import { useEffect, useState } from "react";
 import '../styles/Integrantes.css';
-import data from '../data/data.json';
+import dataSkills from '../data/dataSkills.json';
+import { ExperienceBar } from '../components/ExperienceBar'
+
+import ivanImg from '../assets/img/ivanImg.jpg';
+import nachoImg from '../assets/img/nachoImg.jpg';
+import lauraImg from '../assets/img/lauraImg.jpg';
+import romiImg from '../assets/img/romiImg.jpg';
+import gonzaloImg from '../assets/img/gonzaloImg.png';
 
 
 export default function Integrantes() {
-  const [personajes, setPersonajes] = useState([]);
-  const [flippedIndex, setFlippedIndex] = useState(null);
-  const roles = ['Dev', 'QA', 'PM', 'UX/UI', 'Dev'];
-  const integrantes = ["Ivan", "Ignacio", "Laura", "Romina", "Gonzalo"];
 
-  useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((res) => res.json())
-      .then((data) => {
-        setPersonajes(data.results.slice(0,5));
-      })
-      .catch((error) => console.error('Error al cargar personajes: ', error));
-  }, []);
+  const [flippedIndex, setFlippedIndex] = useState(null);
+  const imagenes = [ivanImg, nachoImg, lauraImg, romiImg, gonzaloImg];
+
 
   const handleFlip = (index) => {
     setFlippedIndex(flippedIndex === index ? null : index);
   };
+
   return (
     <div className="integrantes-page-container">
       <div className="integrantes-container">
         <h1>Nuestro equipo</h1>
         <div className="cards-container">
-          
-          {personajes.map((p, index) => {
-            const nombre = integrantes[index];
-            const favoritos = data.filter(f => f.integrante === nombre);
-          
-          return (
-            <div key={p.id} 
-            className={`card ${flippedIndex === index ? 'flipped': ''}`}
-            onClick={() => handleFlip(index)}
+
+          {dataSkills.map((memberSkills, index) => (
+            <div
+              key={index}
+              className={`card ${flippedIndex === index ? 'flipped' : ''}`}
+              onClick={() => handleFlip(index)}
             >
               <div className="card-inner">
                 <div className="card-front">
-                  <img src={p.image} alt={p.name} />
-                  <h2>{p.name}</h2>
-                  <p>{roles[index]}</p>
-              </div>
-              <div className="card-back">
-                <h3>Favoritos</h3>
-                <ul>
-                  {favoritos.map((item, i) =>(
-                    <li key={i} >
-                      <strong>{item.titulo} </strong> <br />
-                      <em>{item.artista}</em>
-                    </li>
-                  ))}
-                </ul>
+                  <img src={imagenes[index]} alt={memberSkills.integrante} />
+                  <h2>{memberSkills.integrante}</h2>
+                  <p>{memberSkills.rol}</p>
+                </div>
+                <div className="card-back">
+                  <h3>{memberSkills.integrante}</h3>
+                  <p className="rol-back">{memberSkills.rol}</p>
+                  <div className="skills-container">
+                    {memberSkills.skills.map((skill, idx) => (
+                      <ExperienceBar
+                        key={idx}
+                        skill={skill.name}
+                        level={skill.level}
+                        maxLevel={100}
+                        color={skill.color}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          );
-          })}
+          ))}
         </div>
       </div>
     </div>
