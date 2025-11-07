@@ -22,11 +22,11 @@
   justify-content: center;
   gap: 1.5rem;
   perspective: 1000px;
-  
+
 }
 
 .card {
-   width: 260px;
+  width: 260px;
   height: 360px;
   flex-shrink: 0;
   position: relative;
@@ -83,20 +83,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   padding: 1rem;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .card-back p {
-  margin: 0.3rem 0;
+  /* margin: 0.3rem 0; */
   font-size: 0.9rem;
   line-height: 1.2rem;
 }
 
 .card-front img {
-  width: 90%;
+  width: 70%;
+  height: 50%;
+  object-fit: contain;
   border-radius: 10px;
   margin-top: 1rem;
 }
@@ -126,12 +128,10 @@
   left: -75%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%);
   transform: skewX(-20deg);
   transition: all 0.4s ease;
   opacity: 0;
@@ -158,6 +158,7 @@
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -167,9 +168,11 @@
   0% {
     left: -75%;
   }
+
   50% {
     left: 125%;
   }
+
   100% {
     left: 125%;
   }
@@ -179,9 +182,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 200% 50%;
   }
@@ -191,9 +196,9 @@
   from {
     filter: drop-shadow(0 0 5px #0ff) drop-shadow(0 0 20px #f0f) brightness(1);
   }
+
   to {
-    filter: drop-shadow(0 0 25px #0ff) drop-shadow(0 0 45px #f0f)
-      brightness(1.3);
+    filter: drop-shadow(0 0 25px #0ff) drop-shadow(0 0 45px #f0f) brightness(1.3);
   }
 }
 
