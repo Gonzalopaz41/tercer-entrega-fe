@@ -18,6 +18,9 @@ const APIData = () => {
   const statusOptions = ['Alive', 'Dead', 'unknown'];
   const speciesOptions = ['Human', 'Alien', 'Humanoid', 'Robot', 'Cronenberg', 'Animal', 'Disease', 'Poopybutthole', 'Mythological Creature'];
 
+  const statusOptionsForSelect = statusOptions.map(s => ({ value: s, label: translateStatus(s) }));
+  const speciesOptionsForSelect = speciesOptions.map(s => ({ value: s, label: translateSpecies(s) }));
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setQuery(searchTerm);
@@ -91,8 +94,8 @@ const APIData = () => {
           placeholder='Buscar personaje por nombre'
           firstSelect='Estado'
           secondSelect='Especie'
-          tipos={statusOptions}
-          integrantes={speciesOptions}
+          tipos={statusOptionsForSelect}
+          integrantes={speciesOptionsForSelect}
           selectedTipo={selectedStatus}
           selectedIntegrante={selectedSpecies}
           onSearchChange={setSearchTerm}
@@ -104,7 +107,11 @@ const APIData = () => {
 
       </form>
       {loading && <Loader />}
-      {error && <div>Error: {error}</div>}
+      {error && (
+        (typeof error === 'object' && error.status === 404)
+          ? <div>No se encontraron resultados con los parámetros establecidos.</div>
+          : <div>Error: {error.message || error}</div>
+      )}
       {data && data.results && (
         <div className="api-cards">
           {data.results.map(renderCard)}

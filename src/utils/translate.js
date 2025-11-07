@@ -14,8 +14,13 @@ const genderMap = {
 const speciesMap = {
   Human: 'Humano',
   Alien: 'Alienígena',
+  Humanoid: 'Humanoide',
   Robot: 'Robot',
   Animal: 'Animal',
+  Cronenberg: 'Cronenberg',
+  Disease: 'Enfermedad',
+  Poopybutthole: 'Poopybutthole',
+'Mythological Creature': 'Criatura Mitológica',
   unknown: 'Desconocido',
 };
 
@@ -34,4 +39,3 @@ export const translateSpecies = (species) => {
   return speciesMap[species] || species;
 };
 
-export default { translateStatus, translateGender, translateSpecies };

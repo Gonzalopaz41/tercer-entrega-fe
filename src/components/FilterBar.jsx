@@ -17,6 +17,11 @@ export default function FilterBar({
   visibleButtonSearch = false,
 
 }) {
+  const normalize = (opt) => {
+    if (opt && typeof opt === 'object') return opt;
+    return { value: opt, label: opt };
+  };
+
   return (
     <div className="filters-container">
       <div className="filter-group">
@@ -35,9 +40,10 @@ export default function FilterBar({
         <label htmlFor="tipo">{firstSelect}:</label>
         <select id="tipo" value={selectedTipo} onChange={(e) => onTipoChange(e.target.value)} className="filter-select">
           <option value="">Todos</option>
-          {tipos.map(t => (
-            <option key={t} value={t}>{t}</option>
-          ))}
+          {tipos.map(t => {
+            const { value, label } = normalize(t);
+            return (<option key={value} value={value}>{label}</option>);
+          })}
         </select>
       </div>
 
@@ -45,9 +51,10 @@ export default function FilterBar({
         <label htmlFor="integrante">{secondSelect}:</label>
         <select id="integrante" value={selectedIntegrante} onChange={(e) => onIntegranteChange(e.target.value)} className="filter-select">
           <option value="">Todos</option>
-          {integrantes.map(i => (
-            <option key={i} value={i}>{i}</option>
-          ))}
+          {integrantes.map(i => {
+            const { value, label } = normalize(i);
+            return (<option key={value} value={value}>{label}</option>);
+          })}
         </select>
       </div>
 
