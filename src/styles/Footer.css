@@ -17,6 +17,56 @@
     text-shadow: 1px 1px #0099ff;
     transition: all 0.2s ease;
 }
+.social-links {
+  margin-top: 8px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #00ffcc;
+  transition: transform 180ms ease, color 180ms ease, box-shadow 200ms ease;
+  will-change: transform;
+}
+
+.social-link:focus {
+  outline: 2px solid rgba(0,255,204,0.25);
+  outline-offset: 3px;
+}
+
+.github-link .github-icon,
+.github-link .github-text {
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), color 180ms ease;
+}
+
+.github-link:hover .github-icon {
+  transform: scale(1.2) rotate(6deg);
+  color: #fff;
+}
+
+.github-link:hover .github-text {
+  transform: translateX(4px);
+  color: #00ffd8;
+}
+
+.github-link.clicked {
+  animation: github-pop 420ms cubic-bezier(.16,.84,.3,1);
+}
+
+.github-link.clicked .github-icon {
+  filter: drop-shadow(0 6px 14px rgba(0,255,204,0.18));
+  transform: scale(1.18) rotate(6deg);
+}
+
+@keyframes github-pop {
+  0% { transform: scale(1) translateY(0); }
+  30% { transform: scale(1.18) translateY(-6px); }
+  60% { transform: scale(0.98) translateY(2px); }
+  100% { transform: scale(1) translateY(0); }
+}
 
 .footer.centered-content {
     max-width: 800px;
