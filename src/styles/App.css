@@ -13,6 +13,7 @@
   --sidebar-width: 160px;
   --sidebar-collapsed-width: 64px;
   --sidebar-mobile-width: 60px;
+  --sidebar-transition-duration: 360ms;
 }
 
 .app-content {
@@ -20,10 +21,9 @@
   padding: 2rem;
   width: 100%;
   flex: 1;
-  transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease, margin-left 0.28s ease;
+  transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease, margin-left var(--sidebar-transition-duration) cubic-bezier(0.4,0,0.2,1);
 }
 
-/* When the portal is open, apply a subtle transform/blur to the page content for a smooth transition */
 body.portal-open .app-content {
   transition: transform var(--portal-duration, 600ms) cubic-bezier(.2,.9,.3,1),
               filter var(--portal-duration, 600ms) ease,
@@ -33,7 +33,6 @@ body.portal-open .app-content {
   opacity: 0.94;
 }
 
-/* When collapsed, allow the body class to shift content */
 body.sidebar-collapsed .app-content {
   margin-left: var(--sidebar-collapsed-width);
 }
@@ -45,7 +44,6 @@ body {
   color: #fff;
 }
 
-/* Prevent horizontal scroll when sidebar animates */
 html, body { overflow-x: hidden; }
 
 .api-cards {
@@ -63,6 +61,36 @@ html, body { overflow-x: hidden; }
   width: 250px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   color: #fff;
+}
+
+.card {
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 220ms cubic-bezier(.2,.9,.3,1),
+              opacity 220ms ease;
+  will-change: transform, box-shadow, opacity;
+  backface-visibility: hidden;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 18px 40px rgba(3,10,22,0.52), 0 6px 18px rgba(46,212,179,0.06) inset;
+  z-index: 4;
+}
+
+.card:active {
+  transform: translateY(-4px) scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .card:focus-within,
+  .card:active {
+    transition: none;
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
 }
 
 .card h3 {

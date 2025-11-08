@@ -15,7 +15,10 @@
   box-shadow:
     0 0 40px rgba(176, 38, 255, 0.3),
     inset 0 0 60px rgba(0, 240, 255, 0.05);
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width var(--sidebar-transition-duration, 360ms) cubic-bezier(0.4, 0, 0.2, 1),
+              padding var(--sidebar-transition-duration, 360ms) ease,
+              border-color var(--sidebar-transition-duration, 360ms) ease,
+              box-shadow var(--sidebar-transition-duration, 360ms) ease;
 }
 
 .sidebar::before {
@@ -91,7 +94,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: opacity 0.3s;
+  transition: opacity var(--sidebar-transition-duration, 360ms) ease, font-size var(--sidebar-transition-duration, 360ms) ease;
 }
 
 /* Navigation */
@@ -259,7 +262,14 @@
 }
 
 .sidebar.collapsed .label {
-  display: none;
+  /* hide label visually but allow smooth transition instead of abrupt removal */
+  opacity: 0;
+  max-width: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: opacity var(--sidebar-transition-duration, 360ms) ease, max-width var(--sidebar-transition-duration, 360ms) ease;
 }
 
 .sidebar.collapsed .sidebar-link {

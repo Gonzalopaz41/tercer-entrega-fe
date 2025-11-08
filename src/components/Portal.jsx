@@ -57,7 +57,7 @@ const Portal = ({ open = false, duration = 1500 }) => {
     };
   }, [open, duration]);
 
-  // while portal is open, add a body class so the page behind can animate smoothly
+
   useEffect(() => {
     try {
       if (open) {
@@ -68,7 +68,7 @@ const Portal = ({ open = false, duration = 1500 }) => {
         document.body.style.removeProperty('--portal-duration');
       }
     } catch (err) {
-      // ignore (safety for SSR or restricted envs)
+
     }
 
     return () => {
