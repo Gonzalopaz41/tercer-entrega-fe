@@ -26,6 +26,7 @@ const JSONData = () => {
         selectedIntegrante={selectedIntegrante}
         onIntegranteChange={setSelectedIntegrante}
         onClear={() => { setSearchText(''); setSelectedTipo(''); setSelectedIntegrante(''); }}
+        placeholder={'Buscar por título, integrante, tipo, director, artista o año...'}
       />
 
       <div className="api-cards">

@@ -11,7 +11,7 @@ export default function FilterBar({
   selectedIntegrante,
   onIntegranteChange,
   onClear,
-  placeholder = 'Buscar por título, integrante, tipo, director, artista o año...',
+  placeholder,
   firstSelect = 'Tipo',
   secondSelect = 'Integrante',
   visibleButtonSearch = false,
