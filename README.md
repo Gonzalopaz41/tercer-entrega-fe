@@ -199,10 +199,12 @@ La segunda entrega tenía un overlay básico sin efectos de blur avanzados y ani
 La tercera entrega presenta un portal con efectos visuales más sofisticados que crean una experiencia de transición más inmersiva.
 
 **Captura de pantalla - Antes:**
-![Portal - Antes](./public/assets/mejoras/portal-antes.png)
+
+![Portal - Antes](./public/assets/mejoras/portal-antes.gif)
 
 **Captura de pantalla - Después:**
-![Portal - Después](./public/assets/mejoras/portal-despues.png)
+
+![Portal - Después](./public/assets/mejoras/portal-despues.gif)
 
 ---
 
